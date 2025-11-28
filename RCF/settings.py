@@ -11,7 +11,7 @@ SECRET_KEY = 'django-insecure-z1p&t=q0#o1=hr49@gy=_7e*is8qr249q9!%e#sag--j*w-^^p
 DEBUG = False  # Set False for Render deployment
 
 # Replace with your Render app URL
-ALLOWED_HOSTS = ['your-app.onrender.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 INSTALLED_APPS = [
