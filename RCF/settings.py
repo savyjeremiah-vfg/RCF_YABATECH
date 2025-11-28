@@ -8,10 +8,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-z1p&t=q0#o1=hr49@gy=_7e*is8qr249q9!%e#sag--j*w-^^p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False  # Set False for Render deployment
+DEBUG = False  # Set to False for Render deployment
 
 # Replace with your Render app URL
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*']  # You can replace '*' with 'your-app.onrender.com'
 
 # Application definition
 INSTALLED_APPS = [
@@ -24,7 +24,9 @@ INSTALLED_APPS = [
     'myapp',  # Your Django app
 ]
 
+# Middleware configuration with WhiteNoise for static files
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # Must be at the top
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -36,6 +38,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'RCF.urls'
 
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -77,13 +80,11 @@ USE_TZ = True
 
 # Static files (CSS, JS)
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # Render will serve this folder
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Folder where collectstatic puts files
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # Optional: your local static files folder
+    BASE_DIR / "static",  # Local static files folder
 ]
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Media files (uploads)
 MEDIA_URL = '/media/'
